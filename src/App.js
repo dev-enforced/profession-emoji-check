@@ -2,18 +2,32 @@ import React, { useState } from "react";
 import "./styles.css";
 
 var emojiDictionary = {
-  "👨🏻‍⚖️": "Judge",
-  "👩🏻‍🔬": "Scientist",
-  "👮🏻‍♀️": "Officer",
-  "👩🏻‍⚕️": "Doctor",
-  "👩🏻‍✈️": "Pilot",
-  "👩🏻‍🚒": "Firefighter",
-  "👨🏻‍🎤": "Singer",
-  "👨🏻‍💼": "Businessman",
-  "🕵🏻‍♀️": "Detective",
-  "👩🏻‍🚀": "Astronaut",
-  "👨🏻‍🍳": "Chef",
-  "👨🏻‍🎨": "Painter"
+  "👨‍⚖️": "Judge", 
+  "👩‍🔬": "Scientist",
+  "👮": "Officer",
+  "️👩‍⚕️": "Doctor",
+  "👨‍✈️": "Pilot",
+  "👩‍🚒": "Firefighter",
+  "👨‍🎤": "Singer",
+  "👩‍💼": "Entrepreneur",
+  "🕵️‍♂️": "Detective",
+  "👩‍🚀": "Astronaut",
+  "👨‍🍳": "Chef",
+  "👩🏻‍🎨": "Painter"
+};
+var wordDictionary = {
+  "Judge": "👨‍⚖️",
+  "Scientist": "👩‍🔬‍",
+  "Officer": "👮",
+  "Doctor": "👩‍⚕️",
+  "Pilot": "👨‍✈️",
+  "Firefighter": "👩‍🚒",
+  "Singer": "👨‍🎤",
+  "Entrepreneur": "👩‍💼",
+  "Detective": "️️️️️🕵️‍♂️",
+  "Astronaut": "👩‍🚀",
+  "Chef": "👨‍🍳",
+  "Painter": "👩🏻‍🎨"
 };
 var knownEmojis = Object.keys(emojiDictionary);
 
@@ -22,10 +36,18 @@ export default function App() {
   const [meaning, setMeaning] = useState("");
   function inputChangeHandler(event) {
     var newProf = event.target.value;
-    setProf(newProf);
+    var newMeaning='';
+    
     if (newProf in emojiDictionary) {
-      var newMeaning = emojiDictionary[newProf];
+      setProf(newProf);
+      newMeaning = emojiDictionary[newProf];
+    }else if(newProf in wordDictionary){
+      var profPic=wordDictionary[newProf];
+      setProf(profPic);
+      newMeaning=newProf;
     } else {
+      newProf=event.target.value;
+      setProf(newProf);
       newMeaning = "Not Available";
     }
     setMeaning(newMeaning);
@@ -60,7 +82,7 @@ export default function App() {
         <div className="main-body">
           <div className="main-input">
             <p>
-              <label htmlFor="Emoji input">INPUT👇🏻</label>
+              <label htmlFor="Emoji input">INPUT 👇🏻</label>
               <input
                 onChange={inputChangeHandler}
                 id="inp"
@@ -71,13 +93,13 @@ export default function App() {
           </div>
           <div className="main-output">
             <h2>
-              Emoji Entered:
+              Emoji / Word Entered:
               <br />
               {prof}
             </h2>
             <br />
             <h2>
-              Meaning:
+              Meaning/Emoji:
               <br />
               {meaning}
             </h2>
