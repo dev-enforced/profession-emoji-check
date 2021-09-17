@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles.css";
 
 var emojiDictionary = {
-  "👨‍⚖️": "Judge", 
+  "👨‍⚖️": "Judge",
   "👩‍🔬": "Scientist",
   "👮": "Officer",
   "️👩‍⚕️": "Doctor",
@@ -16,18 +16,18 @@ var emojiDictionary = {
   "👩🏻‍🎨": "Painter"
 };
 var wordDictionary = {
-  "Judge": "👨‍⚖️",
-  "Scientist": "👩‍🔬‍",
-  "Officer": "👮",
-  "Doctor": "👩‍⚕️",
-  "Pilot": "👨‍✈️",
-  "Firefighter": "👩‍🚒",
-  "Singer": "👨‍🎤",
-  "Entrepreneur": "👩‍💼",
-  "Detective": "️️️️️🕵️‍♂️",
-  "Astronaut": "👩‍🚀",
-  "Chef": "👨‍🍳",
-  "Painter": "👩🏻‍🎨"
+  Judge: "👨‍⚖️",
+  Scientist: "👩‍🔬‍",
+  Officer: "👮",
+  Doctor: "👩‍⚕️",
+  Pilot: "👨‍✈️",
+  Firefighter: "👩‍🚒",
+  Singer: "👨‍🎤",
+  Entrepreneur: "👩‍💼",
+  Detective: "️️️️️🕵️‍♂️",
+  Astronaut: "👩‍🚀",
+  Chef: "👨‍🍳",
+  Painter: "👩🏻‍🎨"
 };
 var knownEmojis = Object.keys(emojiDictionary);
 
@@ -36,19 +36,24 @@ export default function App() {
   const [meaning, setMeaning] = useState("");
   function inputChangeHandler(event) {
     var newProf = event.target.value;
-    var newMeaning='';
-    
+    var newMeaning = "";
+
     if (newProf in emojiDictionary) {
       setProf(newProf);
       newMeaning = emojiDictionary[newProf];
-    }else if(newProf in wordDictionary){
-      var profPic=wordDictionary[newProf];
+    } else if (newProf in wordDictionary) {
+      var profPic = wordDictionary[newProf];
       setProf(profPic);
-      newMeaning=newProf;
+      newMeaning = newProf;
     } else {
-      newProf=event.target.value;
-      setProf(newProf);
-      newMeaning = "Not Available";
+      newProf = event.target.value;
+      if (event.target.value === "") {
+        setProf(newProf);
+        newMeaning = "Enter a value";
+      } else {
+        setProf(newProf);
+        newMeaning = "Not Available";
+      }
     }
     setMeaning(newMeaning);
   }
